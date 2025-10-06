@@ -1,60 +1,60 @@
-H001,Hospital Tuxtla Cardiológico,CSU001
-H002,Hospital Infantil Tuxtla,CSU001
-H003,Hospital Tuxtla Ortopédico,CSU001
-H004,Hospital San Cristóbal Ginecológico,CSU002
-H005,Hospital San Cristóbal Oftalmológico,CSU002
-H006,Hospital San Cristóbal Oncológico,CSU002
-H007,Hospital Tapachula Pediátrico,CSU003
-H008,Hospital Tapachula Neurológico,CSU003
-H009,Hospital Tapachula General,CSU003
-H010,Hospital Palenque Traumatología,CSU004
-H011,Hospital Palenque Dermatológico,CSU004
-H012,Hospital Palenque Gastroenterológico,CSU004
-H013,Hospital Comitán Reumatológico,CSU005
-H014,Hospital Comitán Psiquiátrico,CSU005
-H015,Hospital Comitán Urológico,CSU005
-H016,Hospital Oaxaca Cardiológico,CSU006
-H017,Hospital Infantil Oaxaca,CSU006
-H018,Hospital Oaxaca Ortopédico,CSU006
-H019,Hospital Salina Cruz Ginecológico,CSU007
-H020,Hospital Salina Cruz Oftalmológico,CSU007
-H021,Hospital Salina Cruz Oncológico,CSU007
-H022,Hospital Juchitán Pediátrico,CSU008
-H023,Hospital Juchitán Neurológico,CSU008
-H024,Hospital Juchitán General,CSU008
-H025,Hospital Puerto Escondido Traumatología,CSU009
-H026,Hospital Puerto Escondido Dermatológico,CSU009
-H027,Hospital Puerto Escondido Gastroenterológico,CSU009
-H028,Hospital Tuxtepec Reumatológico,CSU010
-H029,Hospital Tuxtepec Psiquiátrico,CSU010
-H030,Hospital Tuxtepec Urológico,CSU010
-H031,Hospital Chilpancingo Cardiológico,CSU011
-H032,Hospital Infantil Chilpancingo,CSU011
-H033,Hospital Chilpancingo Ortopédico,CSU011
-H034,Hospital Acapulco Ginecológico,CSU012
-H035,Hospital Acapulco Oftalmológico,CSU012
-H036,Hospital Acapulco Oncológico,CSU012
-H037,Hospital Iguala Pediátrico,CSU013
-H038,Hospital Iguala Neurológico,CSU013
-H039,Hospital Iguala General,CSU013
-H040,Hospital Taxco Traumatología,CSU014
-H041,Hospital Taxco Dermatológico,CSU014
-H042,Hospital Taxco Gastroenterológico,CSU014
-H043,Hospital Zihuatanejo Reumatológico,CSU015
-H044,Hospital Zihuatanejo Psiquiátrico,CSU015
-H045,Hospital Zihuatanejo Urológico,CSU015
-H046,Hospital Villahermosa Cardiológico,CSU016
-H047,Hospital Infantil Villahermosa,CSU016
-H048,Hospital Villahermosa Ortopédico,CSU016
-H049,Hospital Cárdenas Ginecológico,CSU017
-H050,Hospital Cárdenas Oftalmológico,CSU017
-H051,Hospital Cárdenas Oncológico,CSU017
-H052,Hospital Comalcalco Pediátrico,CSU018
-H053,Hospital Comalcalco Neurológico,CSU018
-H054,Hospital Comalcalco General,CSU018
-H055,Hospital Macuspana Traumatología,CSU019
-H056,Hospital Macuspana Dermatológico,CSU019
-H057,Hospital Macuspana Gastroenterológico,CSU019
-H058,Hospital Tenosique Reumatológico,CSU020
-H059,Hospital Tenosique Psiquiátrico,CSU020
-H060,Hospital Tenosique Urológico,CSU020
+HS01,Hospital Tuxtla Cardiológico,CS01
+HS02,Hospital Infantil Tuxtla,CS01
+HS03,Hospital Tuxtla Ortopédico,CS01
+HS04,Hospital San Cristóbal Ginecológico,CS02
+HS05,Hospital San Cristóbal Oftalmológico,CS02
+HS06,Hospital San Cristóbal Oncológico,CS02
+HS07,Hospital Tapachula Pediátrico,CS03
+HS08,Hospital Tapachula Neurológico,CS03
+HS09,Hospital Tapachula General,CS03
+HS10,Hospital Palenque Traumatología,CS04
+HS11,Hospital Palenque Dermatológico,CS04
+HS12,Hospital Palenque Gastroenterológico,CS04
+HS13,Hospital Comitán Reumatológico,CS05
+HS14,Hospital Comitán Psiquiátrico,CS05
+HS15,Hospital Comitán Urológico,CS05
+HS16,Hospital Oaxaca Cardiológico,CS06
+HS17,Hospital Infantil Oaxaca,CS06
+HS18,Hospital Oaxaca Ortopédico,CS06
+HS19,Hospital Salina Cruz Ginecológico,CS07
+HS20,Hospital Salina Cruz Oftalmológico,CS07
+HS21,Hospital Salina Cruz Oncológico,CS07
+HS22,Hospital Juchitán Pediátrico,CS08
+HS23,Hospital Juchitán Neurológico,CS08
+HS24,Hospital Juchitán General,CS08
+HS25,Hospital Puerto Escondido Traumatología,CS09
+HS26,Hospital Puerto Escondido Dermatológico,CS09
+HS27,Hospital Puerto Escondido Gastroenterológico,CS09
+HS28,Hospital Tuxtepec Reumatológico,CS10
+HS29,Hospital Tuxtepec Psiquiátrico,CS10
+HS30,Hospital Tuxtepec Urológico,CS10
+HS31,Hospital Chilpancingo Cardiológico,CS11
+HS32,Hospital Infantil Chilpancingo,CS11
+HS33,Hospital Chilpancingo Ortopédico,CS11
+HS34,Hospital Acapulco Ginecológico,CS12
+HS35,Hospital Acapulco Oftalmológico,CS12
+HS36,Hospital Acapulco Oncológico,CS12
+HS37,Hospital Iguala Pediátrico,CS13
+HS38,Hospital Iguala Neurológico,CS13
+HS39,Hospital Iguala General,CS13
+HS40,Hospital Taxco Traumatología,CS14
+HS41,Hospital Taxco Dermatológico,CS14
+HS42,Hospital Taxco Gastroenterológico,CS14
+HS43,Hospital Zihuatanejo Reumatológico,CS15
+HS44,Hospital Zihuatanejo Psiquiátrico,CS15
+HS45,Hospital Zihuatanejo Urológico,CS15
+HS46,Hospital Villahermosa Cardiológico,CS16
+HS47,Hospital Infantil Villahermosa,CS16
+HS48,Hospital Villahermosa Ortopédico,CS16
+HS49,Hospital Cárdenas Ginecológico,CS17
+HS50,Hospital Cárdenas Oftalmológico,CS17
+HS51,Hospital Cárdenas Oncológico,CS17
+HS52,Hospital Comalcalco Pediátrico,CS18
+HS53,Hospital Comalcalco Neurológico,CS18
+HS54,Hospital Comalcalco General,CS18
+HS55,Hospital Macuspana Traumatología,CS19
+HS56,Hospital Macuspana Dermatológico,CS19
+HS57,Hospital Macuspana Gastroenterológico,CS19
+HS58,Hospital Tenosique Reumatológico,CS20
+HS59,Hospital Tenosique Psiquiátrico,CS20
+HS60,Hospital Tenosique Urológico,CS20

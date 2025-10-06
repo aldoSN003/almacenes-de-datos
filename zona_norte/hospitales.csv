@@ -1,60 +1,60 @@
-HN001,Hospital General Hermosillo,CTN001
-HN002,Clínica Pediátrica Hermosillo,CTN001
-HN003,Hospital de Ortopedia Hermosillo,CTN001
-HN004,Hospital General Nogales,CTN002
-HN005,Clínica de Oftalmología Nogales,CTN002
-HN006,Hospital de Oncología Nogales,CTN002
-HN007,Hospital General Caborca,CTN003
-HN008,Clínica de Neurología Caborca,CTN003
-HN009,Hospital Infantil General Caborca,CTN003
-HN010,Hospital General Guaymas,CTN004
-HN011,Clínica de Traumatología Guaymas,CTN004
-HN012,Hospital de Gastroenterología Guaymas,CTN004
-HN013,Hospital General Navojoa,CTN005
-HN014,Clínica de Reumatología Navojoa,CTN005
-HN015,Hospital de Urología Navojoa,CTN005
-HN016,Hospital Central Chihuahua,CTN006
-HN017,Hospital Infantil Chihuahua,CTN006
-HN018,Hospital de Ortopedia Chihuahua,CTN006
-HN019,Hospital General Juárez,CTN007
-HN020,Clínica de Ginecología Juárez,CTN007
-HN021,Hospital de Oncología Juárez,CTN007
-HN022,Hospital General Delicias,CTN008
-HN023,Clínica de Neurología Delicias,CTN008
-HN024,Hospital Infantil General Delicias,CTN008
-HN025,Hospital General Cuauhtémoc,CTN009
-HN026,Clínica de Traumatología Cuauhtémoc,CTN009
-HN027,Hospital de Gastroenterología Cuauhtémoc,CTN009
-HN028,Hospital General Parral,CTN010
-HN029,Clínica de Reumatología Parral,CTN010
-HN030,Hospital de Urología Parral,CTN010
-HN031,Hospital General Saltillo,CTN011
-HN032,Hospital Infantil Saltillo,CTN011
-HN033,Hospital de Ortopedia Saltillo,CTN011
-HN034,Hospital General Torreón,CTN012
-HN035,Clínica de Ginecología Torreón,CTN012
-HN036,Hospital de Oncología Torreón,CTN012
-HN037,Hospital General Monclova,CTN013
-HN038,Clínica de Neurología Monclova,CTN013
-HN039,Hospital Infantil General Monclova,CTN013
-HN040,Hospital General Piedras Negras,CTN014
-HN041,Clínica de Traumatología Piedras Negras,CTN014
-HN042,Hospital de Gastroenterología Piedras Negras,CTN014
-HN043,Hospital General Acuña,CTN015
-HN044,Clínica de Reumatología Acuña,CTN015
-HN045,Hospital de Urología Acuña,CTN015
-HN046,Hospital Universitario Monterrey,CTN016
-HN047,Hospital Infantil Monterrey,CTN016
-HN048,Hospital de Ortopedia Monterrey,CTN016
-HN049,Hospital General San Nicolás,CTN017
-HN050,Clínica de Oftalmología San Nicolás,CTN017
-HN051,Hospital de Oncología San Nicolás,CTN017
-HN052,Hospital General Apodaca,CTN018
-HN053,Clínica de Neurología Apodaca,CTN018
-HN054,Hospital Infantil General Apodaca,CTN018
-HN055,Hospital General Guadalupe,CTN019
-HN056,Clínica de Ginecología Guadalupe,CTN019
-HN057,Hospital de Oncología Guadalupe,CTN019
-HN058,Hospital General Santa Catarina,CTN020
-HN059,Clínica de Reumatología Santa Catarina,CTN020
-HN060,Hospital de Urología Santa Catarina,CTN020
+HN01,Hospital General Hermosillo,CN01
+HN02,Clínica Pediátrica Hermosillo,CN01
+HN03,Hospital de Ortopedia Hermosillo,CN01
+HN04,Hospital General Nogales,CN02
+HN05,Clínica de Oftalmología Nogales,CN02
+HN06,Hospital de Oncología Nogales,CN02
+HN07,Hospital General Caborca,CN03
+HN08,Clínica de Neurología Caborca,CN03
+HN09,Hospital Infantil General Caborca,CN03
+HN10,Hospital General Guaymas,CN04
+HN11,Clínica de Traumatología Guaymas,CN04
+HN12,Hospital de Gastroenterología Guaymas,CN04
+HN13,Hospital General Navojoa,CN05
+HN14,Clínica de Reumatología Navojoa,CN05
+HN15,Hospital de Urología Navojoa,CN05
+HN16,Hospital Central Chihuahua,CN06
+HN17,Hospital Infantil Chihuahua,CN06
+HN18,Hospital de Ortopedia Chihuahua,CN06
+HN19,Hospital General Juárez,CN07
+HN20,Clínica de Ginecología Juárez,CN07
+HN21,Hospital de Oncología Juárez,CN07
+HN22,Hospital General Delicias,CN08
+HN23,Clínica de Neurología Delicias,CN08
+HN24,Hospital Infantil General Delicias,CN08
+HN25,Hospital General Cuauhtémoc,CN09
+HN26,Clínica de Traumatología Cuauhtémoc,CN09
+HN27,Hospital de Gastroenterología Cuauhtémoc,CN09
+HN28,Hospital General Parral,CN10
+HN29,Clínica de Reumatología Parral,CN10
+HN30,Hospital de Urología Parral,CN10
+HN31,Hospital General Saltillo,CN11
+HN32,Hospital Infantil Saltillo,CN11
+HN33,Hospital de Ortopedia Saltillo,CN11
+HN34,Hospital General Torreón,CN12
+HN35,Clínica de Ginecología Torreón,CN12
+HN36,Hospital de Oncología Torreón,CN12
+HN37,Hospital General Monclova,CN13
+HN38,Clínica de Neurología Monclova,CN13
+HN39,Hospital Infantil General Monclova,CN13
+HN40,Hospital General Piedras Negras,CN14
+HN41,Clínica de Traumatología Piedras Negras,CN14
+HN42,Hospital de Gastroenterología Piedras Negras,CN14
+HN43,Hospital General Acuña,CN15
+HN44,Clínica de Reumatología Acuña,CN15
+HN45,Hospital de Urología Acuña,CN15
+HN46,Hospital Universitario Monterrey,CN16
+HN47,Hospital Infantil Monterrey,CN16
+HN48,Hospital de Ortopedia Monterrey,CN16
+HN49,Hospital General San Nicolás,CN17
+HN50,Clínica de Oftalmología San Nicolás,CN17
+HN51,Hospital de Oncología San Nicolás,CN17
+HN52,Hospital General Apodaca,CN18
+HN53,Clínica de Neurología Apodaca,CN18
+HN54,Hospital Infantil General Apodaca,CN18
+HN55,Hospital General Guadalupe,CN19
+HN56,Clínica de Ginecología Guadalupe,CN19
+HN57,Hospital de Oncología Guadalupe,CN19
+HN58,Hospital General Santa Catarina,CN20
+HN59,Clínica de Reumatología Santa Catarina,CN20
+HN60,Hospital de Urología Santa Catarina,CN20
