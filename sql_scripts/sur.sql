@@ -194,6 +194,34 @@ CREATE TABLE factdetalle (
 );
 
 
+-- -----------------------------------------------------
+-- MODIFICACIONES PARA LA TABLA HOSPITAL
+-- -----------------------------------------------------
+
+-- 1. Añadir la columna 'tipo' a la tabla 'hospitales'
+ALTER TABLE hospitales ADD COLUMN tipo VARCHAR(50);
+
+-- 2. Actualizar todos los registros existentes con un tipo basado en el nombre
+UPDATE hospitales SET tipo =
+    CASE
+        WHEN nombre LIKE '%General%' THEN 'General'
+        WHEN nombre LIKE '%Infantil%' THEN 'Pediátrico'
+        WHEN nombre LIKE '%Pediátrico%' THEN 'Pediátrico'
+        WHEN nombre LIKE '%Cardiológico%' THEN 'Cardiología'
+        WHEN nombre LIKE '%Ortopédico%' THEN 'Ortopedia'
+        WHEN nombre LIKE '%Ginecológico%' THEN 'Ginecología'
+        WHEN nombre LIKE '%Oftalmológico%' THEN 'Oftalmología'
+        WHEN nombre LIKE '%Oncológico%' THEN 'Oncología'
+        WHEN nombre LIKE '%Neurológico%' THEN 'Neurología'
+        WHEN nombre LIKE '%Traumatología%' THEN 'Traumatología'
+        WHEN nombre LIKE '%Dermatológico%' THEN 'Dermatología'
+        WHEN nombre LIKE '%Gastroenterológico%' THEN 'Gastroenterología'
+        WHEN nombre LIKE '%Reumatológico%' THEN 'Reumatología'
+        WHEN nombre LIKE '%Psiquiátrico%' THEN 'Psiquiatría'
+        WHEN nombre LIKE '%Urológico%' THEN 'Urología'
+        ELSE 'Especializado' -- Un tipo por defecto
+    END;
+
 
 
 
