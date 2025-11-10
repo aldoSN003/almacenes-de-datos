@@ -13,18 +13,23 @@ USE hospital_dw;
 -- Fase 1: Creación de las Tablas de Dimensiones
 -- ---------------------------------------------------
 
--- 3. Dimensión Tiempo
+-- 3. Dimensión Tiempo (Actualizada)
 CREATE TABLE dim_tiempo (
     id_tiempo           VARCHAR(10) NOT NULL,
+    fecha               DATE,
     año                 SMALLINT,
     semestre            SMALLINT,
     trimestre           SMALLINT,
     mes                 SMALLINT,
-    quincena            SMALLINT,
-    semana              SMALLINT,
+    nombre_mes          VARCHAR(20),
+    quincena_mes        SMALLINT,
+    quincena_anio       SMALLINT,
+    semana_del_anio     SMALLINT,
+    semana_del_mes      SMALLINT,
     dia_del_año         SMALLINT,
     dia_del_mes         SMALLINT,
     dia_de_semana       SMALLINT,
+    nombre_dia          VARCHAR(15),
     dia_festivo         BOOLEAN,
     dia_fin_de_semana   BOOLEAN,
 
@@ -128,3 +133,6 @@ CREATE TABLE hechos_hospitalizaciones (
     CONSTRAINT fk_hosp_hospital
         FOREIGN KEY (id_hospital) REFERENCES dim_hospital(id_hospital)
 );
+
+
+
