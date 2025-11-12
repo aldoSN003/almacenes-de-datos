@@ -221,6 +221,34 @@ UPDATE hospitales SET tipo =
         WHEN nombre LIKE '%Urológico%' THEN 'Urología'
         ELSE 'Especializado' -- Un tipo por defecto
     END;
+    
+    
+    
+    
+-- 3. Dimensión Tiempo (Actualizada)
+CREATE TABLE dim_tiempo (
+    id_tiempo           VARCHAR(10) NOT NULL,
+    fecha               DATE,
+    año                 SMALLINT,
+    semestre            SMALLINT,
+    trimestre           SMALLINT,
+    mes                 SMALLINT,
+    nombre_mes          VARCHAR(20),
+    quincena_mes        SMALLINT,
+    quincena_anio       SMALLINT,
+    semana_del_anio     SMALLINT,
+    semana_del_mes      SMALLINT,
+    dia_del_año         SMALLINT,
+    dia_del_mes         SMALLINT,
+    dia_de_semana       SMALLINT,
+    nombre_dia          VARCHAR(15),
+    dia_festivo         BOOLEAN,
+    dia_fin_de_semana   BOOLEAN,
+
+    -- Constraint de Llave Primaria nombrada
+    CONSTRAINT pk_dim_tiempo PRIMARY KEY (id_tiempo)
+);
+
 
 
 
