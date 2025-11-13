@@ -251,6 +251,37 @@ CREATE TABLE dim_tiempo (
 
 
 
+-- Step 1: Add the new column id_tiempo to facturas
+ALTER TABLE facturas
+ADD COLUMN id_tiempo VARCHAR(10);
+
+-- Step 2: Populate id_tiempo by matching fecha values
+UPDATE facturas f
+SET id_tiempo = (
+    SELECT dt.id_tiempo
+    FROM dim_tiempo dt
+    WHERE dt.fecha = f.fecha
+);
+
+-- THIS SHOULD RETURN BLANK
+SELECT DISTINCT f.fecha
+  FROM facturas f
+  LEFT JOIN dim_tiempo dt ON f.fecha = dt.fecha
+  WHERE dt.id_tiempo IS NULL;
+
+
+ALTER TABLE facturas
+MODIFY COLUMN id_tiempo VARCHAR(10) NOT NULL;
+
+-- Step 4: Add foreign key constraint
+ALTER TABLE facturas
+ADD CONSTRAINT fk_facturas_tiempo
+FOREIGN KEY (id_tiempo) REFERENCES dim_tiempo(id_tiempo);
+
+-- Step 5: Add an index for better query performance
+CREATE INDEX idx_facturas_id_tiempo ON facturas(id_tiempo);
+
+
 
 
 
