@@ -78,18 +78,20 @@ GO
 -- Fase 2: Creación de las Tablas de Hechos
 -- ---------------------------------------------------
 
+
 -- 7. Hechos de Consultas
 CREATE TABLE hechos_consulta (
     id_tiempo             VARCHAR(10) NOT NULL,
     id_doctor             VARCHAR(5) NOT NULL,
     id_paciente           VARCHAR(5) NOT NULL,
     id_hospital           VARCHAR(5) NOT NULL,
+    id_zona               VARCHAR(5) NOT NULL,  -- ← sin FK
 
     num_consultas             INT DEFAULT 1,
     importe_total_consultas   DECIMAL(12, 2),
 
     CONSTRAINT pk_hechos_consulta
-        PRIMARY KEY (id_tiempo, id_doctor, id_paciente, id_hospital),
+        PRIMARY KEY (id_tiempo, id_doctor, id_paciente, id_hospital, id_zona),
 
     CONSTRAINT fk_consulta_tiempo
         FOREIGN KEY (id_tiempo) REFERENCES dim_tiempo(id_tiempo),
@@ -105,18 +107,21 @@ CREATE TABLE hechos_consulta (
 );
 GO
 
+
+
 -- 8. Hechos de Hospitalizaciones
 CREATE TABLE hechos_hospitalizaciones (
     id_tiempo             VARCHAR(10) NOT NULL,
     id_doctor             VARCHAR(5) NOT NULL,
     id_paciente           VARCHAR(5) NOT NULL,
     id_hospital           VARCHAR(5) NOT NULL,
+    id_zona               VARCHAR(5) NOT NULL,  -- ← sin FK
 
     dias_hospitalizacion          SMALLINT,
     importe_total_hospitalizacion DECIMAL(12, 2),
 
     CONSTRAINT pk_hechos_hospitalizaciones
-        PRIMARY KEY (id_tiempo, id_doctor, id_paciente, id_hospital),
+        PRIMARY KEY (id_tiempo, id_doctor, id_paciente, id_hospital, id_zona),
 
     CONSTRAINT fk_hosp_tiempo
         FOREIGN KEY (id_tiempo) REFERENCES dim_tiempo(id_tiempo),
@@ -131,6 +136,7 @@ CREATE TABLE hechos_hospitalizaciones (
         FOREIGN KEY (id_hospital) REFERENCES dim_hospital(id)
 );
 GO
+
 
 
 
