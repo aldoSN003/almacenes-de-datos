@@ -1,19 +1,19 @@
--- --- SCRIPT COMPLETO CON CONSTRAINTS NOMBRADOS ---
--- ---------------------------------------------------
--- Fase 0: Creación y Selección de la Base de Datos
--- ---------------------------------------------------
+-- --- SCRIPT COMPLETO CORREGIDO PARA SQL SERVER ---
 
--- 1. Crea la base de datos
-CREATE DATABASE hospital_dw;
 
--- 2. Selecciona la base de datos recién creada para usarla
-USE hospital_dw;
+
+
+CREATE DATABASE sistemaHospitalarioDW;
+GO
+
+USE sistemaHospitalarioDW;
+GO
 
 -- ---------------------------------------------------
 -- Fase 1: Creación de las Tablas de Dimensiones
 -- ---------------------------------------------------
 
--- 3. Dimensión Tiempo (Actualizada)
+-- 3. Dimensión Tiempo
 CREATE TABLE dim_tiempo (
     id_tiempo           VARCHAR(10) NOT NULL,
     fecha               DATE,
@@ -30,65 +30,64 @@ CREATE TABLE dim_tiempo (
     dia_del_mes         SMALLINT,
     dia_de_semana       SMALLINT,
     nombre_dia          VARCHAR(15),
-    dia_festivo         BOOLEAN,
-    dia_fin_de_semana   BOOLEAN,
 
-    -- Constraint de Llave Primaria nombrada
+    -- SQL Server no soporta BOOLEAN → usar BIT
+    dia_festivo         BIT,
+    dia_fin_de_semana   BIT,
+
     CONSTRAINT pk_dim_tiempo PRIMARY KEY (id_tiempo)
 );
+GO
 
 -- 4. Dimensión Doctor
 CREATE TABLE dim_doctor (
-    id_doctor             INT AUTO_INCREMENT NOT NULL,
-    nombre                VARCHAR(150) NOT NULL,
-    especialidad_doctor   VARCHAR(100),
-    sueldo                DECIMAL(10, 2),
+    id             VARCHAR(5),
+    nombre                VARCHAR(30),
+    especialidad   VARCHAR(30),
+    sueldo                INT,
 
-    -- Constraint de Llave Primaria nombrada
-    CONSTRAINT pk_dim_doctor PRIMARY KEY (id_doctor)
-);
+    CONSTRAINT pk_dim_doctor PRIMARY KEY (id)
+)
+GO
 
 -- 5. Dimensión Paciente
 CREATE TABLE dim_paciente (
-    id_paciente           INT AUTO_INCREMENT NOT NULL,
-    nombre_paciente       VARCHAR(150) NOT NULL,
-    edad                  SMALLINT,
-    sexo                  VARCHAR(20),
-    etapa_vida            VARCHAR(50),
+    id           VARCHAR(5) ,
+    nombre      VARCHAR(30),
+    edad                  INT,
+    sexo                  VARCHAR(1),
+    nombreEtapaVida            VARCHAR(30),
 
-    -- Constraint de Llave Primaria nombrada
-    CONSTRAINT pk_dim_paciente PRIMARY KEY (id_paciente)
+    CONSTRAINT pk_dim_paciente PRIMARY KEY (id)
 );
+GO
 
 -- 6. Dimensión Hospital
 CREATE TABLE dim_hospital (
-    id_hospital           INT AUTO_INCREMENT NOT NULL,
-    nombre                VARCHAR(150) NOT NULL,
-    tipo_hospital         VARCHAR(100),
-    ciudad                VARCHAR(100),
-    estado                VARCHAR(100),
+    id           VARCHAR(5) NOT NULL,
+    nombre                VARCHAR(60),
+    tipo         VARCHAR(50),
+    ciudad                VARCHAR(40),
+    estado                VARCHAR(40),
 
-    -- Constraint de Llave Primaria nombrada
-    CONSTRAINT pk_dim_hospital PRIMARY KEY (id_hospital)
+    CONSTRAINT pk_dim_hospital PRIMARY KEY (id)
 );
+GO
 
 -- ---------------------------------------------------
 -- Fase 2: Creación de las Tablas de Hechos
 -- ---------------------------------------------------
 
--- 7. Tabla de Hechos de Consultas
+-- 7. Hechos de Consultas
 CREATE TABLE hechos_consulta (
-    -- Llaves Foráneas (FKs)
     id_tiempo             VARCHAR(10) NOT NULL,
-    id_doctor             INT NOT NULL,
-    id_paciente           INT NOT NULL,
-    id_hospital           INT NOT NULL,
+    id_doctor             VARCHAR(5) NOT NULL,
+    id_paciente           VARCHAR(5) NOT NULL,
+    id_hospital           VARCHAR(5) NOT NULL,
 
-    -- Métricas
     num_consultas             INT DEFAULT 1,
     importe_total_consultas   DECIMAL(12, 2),
 
-    -- Definición de Constraints (PK y FKs)
     CONSTRAINT pk_hechos_consulta
         PRIMARY KEY (id_tiempo, id_doctor, id_paciente, id_hospital),
 
@@ -96,28 +95,26 @@ CREATE TABLE hechos_consulta (
         FOREIGN KEY (id_tiempo) REFERENCES dim_tiempo(id_tiempo),
 
     CONSTRAINT fk_consulta_doctor
-        FOREIGN KEY (id_doctor) REFERENCES dim_doctor(id_doctor),
+        FOREIGN KEY (id_doctor) REFERENCES dim_doctor(id),
 
     CONSTRAINT fk_consulta_paciente
-        FOREIGN KEY (id_paciente) REFERENCES dim_paciente(id_paciente),
+        FOREIGN KEY (id_paciente) REFERENCES dim_paciente(id),
 
     CONSTRAINT fk_consulta_hospital
-        FOREIGN KEY (id_hospital) REFERENCES dim_hospital(id_hospital)
+        FOREIGN KEY (id_hospital) REFERENCES dim_hospital(id)
 );
+GO
 
--- 8. Tabla de Hechos de Hospitalizaciones
+-- 8. Hechos de Hospitalizaciones
 CREATE TABLE hechos_hospitalizaciones (
-    -- Llaves Foráneas (FKs)
     id_tiempo             VARCHAR(10) NOT NULL,
-    id_doctor             INT NOT NULL,
-    id_paciente           INT NOT NULL,
-    id_hospital           INT NOT NULL,
+    id_doctor             VARCHAR(5) NOT NULL,
+    id_paciente           VARCHAR(5) NOT NULL,
+    id_hospital           VARCHAR(5) NOT NULL,
 
-    -- Métricas
     dias_hospitalizacion          SMALLINT,
     importe_total_hospitalizacion DECIMAL(12, 2),
 
-    -- Definición de Constraints (PK y FKs)
     CONSTRAINT pk_hechos_hospitalizaciones
         PRIMARY KEY (id_tiempo, id_doctor, id_paciente, id_hospital),
 
@@ -125,14 +122,27 @@ CREATE TABLE hechos_hospitalizaciones (
         FOREIGN KEY (id_tiempo) REFERENCES dim_tiempo(id_tiempo),
 
     CONSTRAINT fk_hosp_doctor
-        FOREIGN KEY (id_doctor) REFERENCES dim_doctor(id_doctor),
+        FOREIGN KEY (id_doctor) REFERENCES dim_doctor(id),
 
     CONSTRAINT fk_hosp_paciente
-        FOREIGN KEY (id_paciente) REFERENCES dim_paciente(id_paciente),
+        FOREIGN KEY (id_paciente) REFERENCES dim_paciente(id),
 
     CONSTRAINT fk_hosp_hospital
-        FOREIGN KEY (id_hospital) REFERENCES dim_hospital(id_hospital)
+        FOREIGN KEY (id_hospital) REFERENCES dim_hospital(id)
 );
+GO
+
+
+
+
+-- ESTAS SENTENCIAS SE EJECUTAN UNA VEZ QUE LA TABLA TIEMPO ESTÉ LLENA
+
+UPDATE dim_tiempo
+SET nombre_mes = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(nombre_mes, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
+
+-- Actualizar el nombre del día
+UPDATE dim_tiempo
+SET nombre_dia = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(nombre_dia, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
 
 
 

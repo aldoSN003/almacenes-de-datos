@@ -1,8 +1,9 @@
-
 -- Crear la base de datos
 CREATE DATABASE sistemaHospitalarioNorte;
+GO
 
 USE sistemaHospitalarioNorte;
+GO
 
 -- -----------------------------------------------------
 -- Tabla Zonas
@@ -11,25 +12,29 @@ CREATE TABLE zonas (
     idZona VARCHAR(5) PRIMARY KEY,
     nombreZona VARCHAR(30)
 );
+GO
 
 INSERT INTO zonas (idZona, nombreZona) VALUES
 ('ZN01', 'Zona Norte');
+GO
 
 -- -----------------------------------------------------
 -- Tabla Estados (con el prefijo modificado)
 -- -----------------------------------------------------
 CREATE TABLE estados (
-    idEstado VARCHAR(6) PRIMARY KEY, -- Se ajusta el tamaño para el nuevo prefijo
+    idEstado VARCHAR(6) PRIMARY KEY,
     nombre VARCHAR(40),
     idZona VARCHAR(5),
     FOREIGN KEY (idZona) REFERENCES zonas(idZona)
 );
+GO
 
 INSERT INTO estados (idEstado, nombre, idZona) VALUES
 ('EN001', 'Sonora', 'ZN01'),
 ('EN002', 'Chihuahua', 'ZN01'),
 ('EN003', 'Coahuila', 'ZN01'),
 ('EN004', 'Nuevo Leon', 'ZN01');
+GO
 
 -- -----------------------------------------------------
 -- Tabla Ciudades (con las referencias actualizadas)
@@ -39,9 +44,10 @@ CREATE TABLE ciudades (
     nombre VARCHAR(40),
     poblacion INT,
     region VARCHAR(1),
-    idEstado VARCHAR(6), -- Se ajusta el tamaño para coincidir
+    idEstado VARCHAR(6),
     FOREIGN KEY (idEstado) REFERENCES estados(idEstado)
 );
+GO
 
 INSERT INTO ciudades (idCiudad, nombre, poblacion, region, idEstado) VALUES
 -- Sonora
@@ -71,6 +77,7 @@ INSERT INTO ciudades (idCiudad, nombre, poblacion, region, idEstado) VALUES
 ('CN18', 'Apodaca', 656464, 'N', 'EN004'),
 ('CN19', 'Guadalupe', 673616, 'N', 'EN004'),
 ('CN20', 'Santa Catarina', 307789, 'N', 'EN004');
+GO
 
 -- -----------------------------------------------------
 -- Tabla Hospitales
@@ -81,6 +88,7 @@ CREATE TABLE hospitales (
     idCiudad VARCHAR(5),
     FOREIGN KEY (idCiudad) REFERENCES ciudades(idCiudad)
 );
+GO
 
 INSERT INTO hospitales (idHosp, nombre, idCiudad) VALUES
 -- Sonora
@@ -150,8 +158,7 @@ INSERT INTO hospitales (idHosp, nombre, idCiudad) VALUES
 ('HN58', 'Hospital General Santa Catarina', 'CN20'),
 ('HN59', 'Clínica de Reumatología Santa Catarina', 'CN20'),
 ('HN60', 'Hospital de Urología Santa Catarina', 'CN20');
-
-
+GO
 
 -- -----------------------------------------------------
 -- Tabla Facturas
@@ -163,46 +170,29 @@ CREATE TABLE facturas (
     idHosp VARCHAR(5),
     FOREIGN KEY (idHosp) REFERENCES hospitales(idHosp)
 );
+GO
 
 -- -----------------------------------------------------
 -- Tabla Factura Detalle
 -- -----------------------------------------------------
-
--- CREATE TABLE factdetalle (
-   -- idFactura VARCHAR(5),
-    -- concepto VARCHAR(100),
-    -- idDoctor VARCHAR(100),
-    -- cant INT,
-    -- iva DECIMAL(6,2),
-    -- PRIMARY KEY (idFactura, concepto),
-    -- FOREIGN KEY (idFactura) REFERENCES facturas(idFactura)
--- );
-
-
 CREATE TABLE factdetalle (
-
     idFacturaDetalle VARCHAR(12) PRIMARY KEY,
-
     idFactura VARCHAR(7),
-
     concepto VARCHAR(5),
-
     idDoctor VARCHAR(5),
-
     cant INT,
     iva DECIMAL(6,2),
-
     FOREIGN KEY (idFactura) REFERENCES facturas(idFactura)
 );
-
-
+GO
 
 -- -----------------------------------------------------
 -- MODIFICACIONES PARA LA TABLA HOSPITAL
 -- -----------------------------------------------------
 
 -- 1. Añadir la columna 'tipo' a la tabla 'hospitales'
-ALTER TABLE hospitales ADD COLUMN tipo VARCHAR(50);
+ALTER TABLE hospitales ADD tipo VARCHAR(50);
+GO
 
 -- 2. Actualizar todos los registros existentes con un tipo basado en el nombre
 UPDATE hospitales SET tipo =
@@ -222,66 +212,61 @@ UPDATE hospitales SET tipo =
         WHEN nombre LIKE 'Hospital de Urología%' THEN 'Urología'
         WHEN nombre LIKE 'Clínica de Ginecología%' THEN 'Ginecología'
         WHEN nombre LIKE 'Hospital Universitario%' THEN 'Universitario'
-        ELSE 'Especializado' -- Un tipo por defecto para los que no coincidan
+        ELSE 'Especializado'
     END;
+GO
 
--- 3. Dimensión Tiempo (Actualizada)
+-- 3. Dimensión Tiempo
 CREATE TABLE dim_tiempo (
-    id_tiempo           VARCHAR(10) NOT NULL,
-    fecha               DATE,
-    año                 SMALLINT,
-    semestre            SMALLINT,
-    trimestre           SMALLINT,
-    mes                 SMALLINT,
-    nombre_mes          VARCHAR(20),
-    quincena_mes        SMALLINT,
-    quincena_anio       SMALLINT,
-    semana_del_anio     SMALLINT,
-    semana_del_mes      SMALLINT,
-    dia_del_año         SMALLINT,
-    dia_del_mes         SMALLINT,
-    dia_de_semana       SMALLINT,
-    nombre_dia          VARCHAR(15),
-    dia_festivo         BOOLEAN,
-    dia_fin_de_semana   BOOLEAN,
-
-    -- Constraint de Llave Primaria nombrada
+    id_tiempo VARCHAR(10) NOT NULL,
+    fecha DATE,
+    año SMALLINT,
+    semestre SMALLINT,
+    trimestre SMALLINT,
+    mes SMALLINT,
+    nombre_mes VARCHAR(20),
+    quincena_mes SMALLINT,
+    quincena_anio SMALLINT,
+    semana_del_anio SMALLINT,
+    semana_del_mes SMALLINT,
+    dia_del_año SMALLINT,
+    dia_del_mes SMALLINT,
+    dia_de_semana SMALLINT,
+    nombre_dia VARCHAR(15),
+    dia_festivo BIT,
+    dia_fin_de_semana BIT,
     CONSTRAINT pk_dim_tiempo PRIMARY KEY (id_tiempo)
 );
-
-
+GO
 
 -- Step 1: Add the new column id_tiempo to facturas
-ALTER TABLE facturas
-ADD COLUMN id_tiempo VARCHAR(10);
+ALTER TABLE facturas ADD id_tiempo VARCHAR(10);
+GO
 
 -- Step 2: Populate id_tiempo by matching fecha values
-UPDATE facturas f
-SET id_tiempo = (
-    SELECT dt.id_tiempo
-    FROM dim_tiempo dt
-    WHERE dt.fecha = f.fecha
-);
+UPDATE f
+SET f.id_tiempo = dt.id_tiempo
+FROM facturas f
+INNER JOIN dim_tiempo dt ON dt.fecha = f.fecha;
+GO
 
--- THIS SHOULD RETURN BLANK
+-- Verificación: THIS SHOULD RETURN BLANK
 SELECT DISTINCT f.fecha
-  FROM facturas f
-  LEFT JOIN dim_tiempo dt ON f.fecha = dt.fecha
-  WHERE dt.id_tiempo IS NULL;
+FROM facturas f
+LEFT JOIN dim_tiempo dt ON f.fecha = dt.fecha
+WHERE dt.id_tiempo IS NULL;
+GO
 
-
-ALTER TABLE facturas
-MODIFY COLUMN id_tiempo VARCHAR(10) NOT NULL;
+-- Step 3: Make id_tiempo NOT NULL
+ALTER TABLE facturas ALTER COLUMN id_tiempo VARCHAR(10) NOT NULL;
+GO
 
 -- Step 4: Add foreign key constraint
 ALTER TABLE facturas
 ADD CONSTRAINT fk_facturas_tiempo
 FOREIGN KEY (id_tiempo) REFERENCES dim_tiempo(id_tiempo);
+GO
 
 -- Step 5: Add an index for better query performance
 CREATE INDEX idx_facturas_id_tiempo ON facturas(id_tiempo);
-
-
-
-
-
+GO
