@@ -239,34 +239,92 @@ CREATE TABLE dim_tiempo (
 );
 GO
 
--- Step 1: Add the new column id_tiempo to facturas
-ALTER TABLE facturas ADD id_tiempo VARCHAR(10);
-GO
+-- Tabla Concepto
+CREATE TABLE concepto (
+    id VARCHAR(5) PRIMARY KEY,
+    nombre VARCHAR(40),
+    descripcion TEXT,
+    precioBase DECIMAL(6,2)
+);
+
+
+INSERT INTO concepto (id, nombre, descripcion, precioBase) VALUES
+('CP001', 'Consulta', 'Atencion medica general en consultorio, sin urgencia.', 850.00),
+('CP002', 'Hospitalizacion', 'Estadia por 24 horas en habitacion estandar.', 2500.00),
+('CP003', 'Examen de Laboratorio', 'Analisis de sangre y orina basicos (Biometria, Urianalisis).', 620.50),
+('CP004', 'Sutura Menor', 'Procedimiento para cerrar heridas simples con anestesia local.', 1300.00),
+('CP005', 'Dia de Quirofano', 'Uso del area de cirugia por 1 hora, incluye equipo y personal tecnico.', 7500.00),
+('CP006', 'Medicamento Estandar', 'Suministro de medicamentos basicos (analgesicos, antibioticos).', 150.00),
+('CP007', 'Radiografia Simple', 'Toma de imagenologia de una zona especifica (ej. torax o mano).', 780.00);
+
+
+
+
+
+
+
+ALTER TABLE facturas
+ADD id_tiempo VARCHAR(10);
 
 -- Step 2: Populate id_tiempo by matching fecha values
 UPDATE f
 SET f.id_tiempo = dt.id_tiempo
 FROM facturas f
-INNER JOIN dim_tiempo dt ON dt.fecha = f.fecha;
-GO
+JOIN dim_tiempo dt ON dt.fecha = f.fecha;
 
--- Verificación: THIS SHOULD RETURN BLANK
-SELECT DISTINCT f.fecha
-FROM facturas f
-LEFT JOIN dim_tiempo dt ON f.fecha = dt.fecha
-WHERE dt.id_tiempo IS NULL;
-GO
 
--- Step 3: Make id_tiempo NOT NULL
-ALTER TABLE facturas ALTER COLUMN id_tiempo VARCHAR(10) NOT NULL;
-GO
 
--- Step 4: Add foreign key constraint
 ALTER TABLE facturas
 ADD CONSTRAINT fk_facturas_tiempo
-FOREIGN KEY (id_tiempo) REFERENCES dim_tiempo(id_tiempo);
+    FOREIGN KEY (id_tiempo) REFERENCES dim_tiempo(id_tiempo);
+
+
+
+
+
+
+
+-- Función anidada para quitar acentos en SQL Server
+-- Zonas
+UPDATE zonas
+SET nombreZona = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+    nombreZona COLLATE Latin1_General_CI_AI, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
 GO
 
--- Step 5: Add an index for better query performance
-CREATE INDEX idx_facturas_id_tiempo ON facturas(id_tiempo);
+-- Estados
+UPDATE estados
+SET nombre = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+    nombre COLLATE Latin1_General_CI_AI, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
+GO
+
+-- Ciudades
+UPDATE ciudades
+SET nombre = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+    nombre COLLATE Latin1_General_CI_AI, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
+GO
+
+-- Hospitales
+UPDATE hospitales
+SET nombre = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+    nombre COLLATE Latin1_General_CI_AI, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
+
+UPDATE hospitales
+SET nombre = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+    tipo COLLATE Latin1_General_CI_AI, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
+GO
+
+-- Factura Detalle
+UPDATE factdetalle
+SET concepto = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+    concepto COLLATE Latin1_General_CI_AI, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
+GO
+
+-- Dimensión Tiempo
+UPDATE dim_tiempo
+SET nombre_mes = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+    nombre_mes COLLATE Latin1_General_CI_AI, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
+
+UPDATE dim_tiempo
+SET nombre_dia = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(
+    nombre_dia COLLATE Latin1_General_CI_AI, 'á', 'a'), 'é', 'e'), 'í', 'i'), 'ó', 'o'), 'ú', 'u');
 GO
