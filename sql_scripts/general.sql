@@ -68,6 +68,9 @@ INSERT INTO concepto (id, nombre, descripcion, precioBase) VALUES
 ('CP007', 'Radiografia Simple', 'Toma de imagenologia de una zona especifica (ej. torax o mano).', 780.00);
 
 
+
+-- ESTAS SENTENCIAS SE EJECUTAN PARA CORREGIR LOS DATOS DEL CSV
+
 UPDATE doctores
 SET
     nombre = translate(nombre,
@@ -86,6 +89,11 @@ SET
         'áéíóúÁÉÍÓÚñÑ',
         'aeiouAEIOUnN')
 
+
+UPDATE pacientes p
+SET idEtapaVida = e.id
+FROM etapaVida e
+WHERE p.edad BETWEEN e.edadLimInf AND e.edadLimSup;
 
 
 
